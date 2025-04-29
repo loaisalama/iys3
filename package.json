@@ -1,24 +1,18 @@
 {
-  "name": "your-project-name",
+  "name": "stripe-server",
   "version": "1.0.0",
-  "description": "Description of your project",
-  "main": "index.js",
+  "description": "Simple Express server with Stripe integration",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "dependencies": {
-    "stripe": "^8.0.0",    // تحديث النسخة المتوافقة من Stripe
-    "cors": "^2.8.5",      // إضافة حزمة CORS
-    "express": "^4.17.1",  // تأكد من وجود Express إذا كنت تستخدمه
-    "other-dependency": "version"  // إذا كنت تستخدم أي مكتبات أخرى
-  },
-  "devDependencies": {
-    "some-dev-package": "version"  // إذا كنت تستخدم أي حزم تطويرية أخرى
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "stripe": "^12.0.0",
+    "body-parser": "^1.20.2"
   },
   "engines": {
-    "node": ">=16.0.0" // تأكد من أنك تستخدم إصدار Node.js متوافق مع تطبيقك
-  },
-  "author": "Your Name",
-  "license": "MIT"
+    "node": ">=14.0.0"
+  }
 }
