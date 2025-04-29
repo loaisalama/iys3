@@ -1,32 +1,37 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-require("dotenv").config();
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
-const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static("public")); // لو وضعت الملفات الثابتة في مجلد public
 
-app.post("/check", async (req, res) => {
-  const { cc, dd, yy, vv } = req.body;
-  const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+// نقطة اختبار
+app.get('/', (req, res) => {
+  res.send('Stripe server is running');
+});
+
+// نقطة دفع
+app.post('/create-payment-intent', async (req, res) => {
+  const { amount } = req.body;
 
   try {
-    // مثال على فحص رمزي: محاولة إنشاء customer
-    const customer = await stripe.customers.create({
-      name: "Test User",
-      description: `بطاقة: ${cc}|${dd}|${yy}|${vv}`,
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency: 'usd',
     });
 
-    res.send("صحيح - تم الاتصال بنجاح");
-  } catch (err) {
-    res.status(400).send("خاطئ - فشل الاتصال");
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
   }
 });
 
-app.listen(port, () => {
-  console.log(`السيرفر يعمل على http://localhost:${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
