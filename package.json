@@ -1,14 +1,24 @@
 {
-  "name": "iys3",
+  "name": "your-project-name",
   "version": "1.0.0",
-  "description": "Stripe Payment Integration",
-  "main": "server.js",
+  "description": "Description of your project",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "express": "^4.17.1",
-    "stripe": "^11.15.0",
-    "dotenv": "^16.3.1"
-  }
+    "stripe": "^8.0.0",    // تحديث النسخة المتوافقة من Stripe
+    "cors": "^2.8.5",      // إضافة حزمة CORS
+    "express": "^4.17.1",  // تأكد من وجود Express إذا كنت تستخدمه
+    "other-dependency": "version"  // إذا كنت تستخدم أي مكتبات أخرى
+  },
+  "devDependencies": {
+    "some-dev-package": "version"  // إذا كنت تستخدم أي حزم تطويرية أخرى
+  },
+  "engines": {
+    "node": ">=16.0.0" // تأكد من أنك تستخدم إصدار Node.js متوافق مع تطبيقك
+  },
+  "author": "Your Name",
+  "license": "MIT"
 }
